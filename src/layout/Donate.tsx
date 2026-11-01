@@ -19,14 +19,14 @@ const DONATION_OPTIONS: DonationOption[] = [
 		coin: 'Spark',
 		network: 'Spark',
 		address:
-			'sm1c5nlzjpzhqnljxhdu75qfw7876ez0g4uqr0hmklz2z2gsmlx65xckn762mlj4sumkejgsuyh93532qdhvy7lsex523hea30gl0zlnc3nt2qhhhand9hyc6u4dk5f7fn8p6w8hzs2sre39'
+			'sm1yyxc2ndwmflwqadxsqm224cgnvnrjzd3zsz9307l0y4a6ymzckwc408ehv2zk48yw3s0ug2wvfj9446pw5l7phfrm2pumcywc5amayys28ql56kcw6feeufl7xsm9m7v6mu6qgguwht5r'
 	},
 	{
 		key: 'mainnet',
 		label: 'Firo',
 		coin: 'Transparent',
 		network: 'Mainnet',
-		address: 'a7ispoSZNH72k1aLhtDWfUd18HRMTBidCx'
+		address: 'aGvFqA9DpQCdmdgxpEwYggJSANgSWsUz7b'
 	}
 ];
 
