@@ -148,8 +148,10 @@ export interface Exchange {
 	id: string;
 	status: ExchangeStatus;
 	currency_from: AllowedCoin;
-	currency_to: AllowedCoin;
+	/** Documented, but omitted by upstream in practice. */
+	currency_to?: AllowedCoin;
 	amount_from: string;
+	expected_amount?: string;
 	amount_to: string;
 	address_from: string;
 	address_to: string;
@@ -157,6 +159,6 @@ export interface Exchange {
 	extra_id_to: string;
 	tx_from: string;
 	tx_to: string;
-	refund_address: string;
+	refund_address: string | null;
 	refund_extra_id: string;
 }

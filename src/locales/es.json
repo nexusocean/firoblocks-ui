@@ -170,6 +170,7 @@
 		"saveSwapId": "Guarde su Swap ID",
 		"swapIdCopied": "Swap ID copiado",
 		"errorEstimate": "No se pudo obtener la estimación. Inténtelo de nuevo.",
+		"errorEstimateRejected": "No hay tasa disponible para este par y monto: {{reason}}",
 		"errorInvalidReceive": "Dirección de recepción {{coin}} no válida.",
 		"errorInvalidRefund": "Dirección de reembolso {{coin}} no válida.",
 		"errorCreateSwap": "No se pudo crear el intercambio. Inténtelo de nuevo.",

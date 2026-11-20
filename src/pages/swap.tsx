@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getEstimate, createExchange, getExchange, getPrice } from '@/services/api';
 import { COIN_VALIDATION, type AllowedCoin, type Exchange, type ExchangeStatus } from '@/types';
 import Cookies from 'js-cookie';
+import { isAxiosError } from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
@@ -84,7 +85,7 @@ export default function Swap() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const { data: swap } = useQuery({
+	const { data: swap, error: swapError } = useQuery({
 		queryKey: ['swap', opaqueId],
 		queryFn: () => getExchange(opaqueId!),
 		enabled: opaqueId !== null,
@@ -146,8 +147,15 @@ export default function Swap() {
 				rate: `1 ${sendCoin.toUpperCase()} ≈ ${perUnitRate} ${receiveCoin.toUpperCase()}`,
 				estimated: res.estimated_amount
 			});
-		} catch {
-			setError(t('swap.errorEstimate'));
+		} catch (e) {
+			setReceiveAmount('');
+			const reason =
+				isAxiosError(e) && e.response?.status === 400 ? e.response.data?.message : null;
+			setError(
+				typeof reason === 'string'
+					? t('swap.errorEstimateRejected', { reason })
+					: t('swap.errorEstimate')
+			);
 		} finally {
 			setEstimating(false);
 		}
@@ -216,7 +224,19 @@ export default function Swap() {
 		setSearchParams({}, { replace: true });
 	};
 
-	const displaySendAmount = swap?.amount_from ? trimZeros(swap.amount_from) : sendAmount;
+	// Swap no longer exists (mapping expired after 7 days): start fresh.
+	useEffect(() => {
+		if (isAxiosError(swapError) && swapError.response?.status === 404) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			handleReset();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [swapError]);
+
+	// amount_from is what was actually sent (0 before deposit); expected_amount is what was requested.
+	const swapSendAmount =
+		swap && Number(swap.amount_from) > 0 ? swap.amount_from : swap?.expected_amount;
+	const displaySendAmount = swapSendAmount ? trimZeros(swapSendAmount) : sendAmount;
 	const displayReceiveAmount = swap?.amount_to ? trimZeros(swap.amount_to) : receiveAmount;
 	const displaySendCoin = swap?.currency_from ?? sendCoin;
 	const displayReceiveCoin = swap?.currency_to ?? receiveCoin;

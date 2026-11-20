@@ -170,6 +170,7 @@
 		"saveSwapId": "Save your Swap ID",
 		"swapIdCopied": "Swap ID copied",
 		"errorEstimate": "Failed to get estimate. Please try again.",
+		"errorEstimateRejected": "No rate available for this pair and amount: {{reason}}",
 		"errorInvalidReceive": "Invalid {{coin}} receive address.",
 		"errorInvalidRefund": "Invalid {{coin}} refund address.",
 		"errorCreateSwap": "Failed to create swap. Please try again.",

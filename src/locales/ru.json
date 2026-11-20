@@ -172,6 +172,7 @@
 		"saveSwapId": "Сохраните ваш Swap ID",
 		"swapIdCopied": "Swap ID скопирован",
 		"errorEstimate": "Не удалось получить расчёт. Попробуйте ещё раз.",
+		"errorEstimateRejected": "Курс для этой пары и суммы недоступен: {{reason}}",
 		"errorInvalidReceive": "Неверный адрес получения {{coin}}.",
 		"errorInvalidRefund": "Неверный адрес возврата {{coin}}.",
 		"errorCreateSwap": "Не удалось создать обмен. Попробуйте ещё раз.",
